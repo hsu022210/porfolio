@@ -1,4 +1,4 @@
-# AlecHsu Portfolio
+# Portfolio
 
 [![Vite](https://img.shields.io/badge/Vite-4.0+-purple?logo=vite&logoColor=white)](https://vitejs.dev/) [![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/) [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?logo=typescript) ](https://www.typescriptlang.org/) [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
 
