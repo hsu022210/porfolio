@@ -13,10 +13,33 @@ const About = () => {
     { icon: MapPin, label: 'Location', value: 'Los Angeles, CA' },
     { icon: Calendar, label: 'Experience', value: '6+ Years' },
     { icon: Shield, label: 'Citizenship', value: 'U.S. Citizen' },
-    { icon: Mail, label: 'Email', value: 'alechsu83@gmail.com' },
-    { icon: Linkedin, label: 'LinkedIn', value: 'linkedin.com/in/alechsu83' },
-    { icon: Github, label: 'GitHub', value: 'github.com/hsu022210' },
-    { icon: FileText, label: 'Resume', value: 'Download PDF' },
+  ];
+
+  const contactLinks = [
+    { 
+      icon: Mail, 
+      label: 'Email', 
+      href: 'mailto:alechsu83@gmail.com',
+      color: 'text-orange-500 hover:text-orange-600'
+    },
+    { 
+      icon: Linkedin, 
+      label: 'LinkedIn', 
+      href: 'https://linkedin.com/in/alechsu83',
+      color: 'text-blue-600 hover:text-blue-700'
+    },
+    { 
+      icon: Github, 
+      label: 'GitHub', 
+      href: 'https://github.com/hsu022210',
+      color: 'text-purple-600 hover:text-purple-700'
+    },
+    { 
+      icon: FileText, 
+      label: 'Resume', 
+      href: 'https://drive.google.com/file/d/1A7tSV9T6Sfo1JRQqeDnZbfceak4JrhRO/view?usp=share_link',
+      color: 'text-green-600 hover:text-green-700'
+    },
   ];
 
   return (
@@ -39,26 +62,17 @@ const About = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-          <Card className="">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                <User className="h-4 w-4 sm:h-5 sm:w-5" />
-                Personal Information
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 sm:space-y-4">
-              {personalInfo.map((info, index) => {
-                const isLink = info.label === 'LinkedIn' || info.label === 'GitHub' || info.label === 'Resume';
-                const isEmail = info.label === 'Email';
-                
-                let href = '';
-                if (info.label === 'LinkedIn') href = 'https://linkedin.com/in/alechsu83';
-                if (info.label === 'GitHub') href = 'https://github.com/hsu022210';
-                if (info.label === 'Resume') href = 'https://drive.google.com/file/d/1A7tSV9T6Sfo1JRQqeDnZbfceak4JrhRO/view?usp=share_link';
-                if (info.label === 'Email') href = 'mailto:alechsu83@gmail.com';
-
-                const content = (
-                  <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <User className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Personal Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 sm:space-y-4">
+                {personalInfo.map((info, index) => (
+                  <div key={index} className="flex items-start sm:items-center gap-3 sm:gap-4">
                     <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
                       <info.icon className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Badge>
@@ -67,30 +81,37 @@ const About = () => {
                       <span className="ml-1 sm:ml-2 font-medium text-sm sm:text-base break-words">{info.value}</span>
                     </div>
                   </div>
-                );
+                ))}
+              </CardContent>
+            </Card>
 
-                if (isLink || isEmail) {
-                  return (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                  Contact & Links
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  {contactLinks.map((link, index) => (
                     <a
                       key={index}
-                      href={href}
-                      target={info.label === 'Resume' ? '_blank' : '_blank'}
+                      href={link.href}
+                      target="_blank"
                       rel="noopener noreferrer"
-                      className="block hover:bg-muted/50 rounded-lg p-2 -m-2 transition-colors"
+                      className="flex flex-col items-center gap-2 p-4 rounded-lg border hover:bg-muted/50 transition-all duration-200 hover:scale-105 group"
                     >
-                      {content}
+                      <div className={`p-2 rounded-full bg-muted/50 group-hover:bg-muted transition-colors ${link.color}`}>
+                        <link.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-medium text-center">{link.label}</span>
                     </a>
-                  );
-                }
-
-                return (
-                  <div key={index}>
-                    {content}
-                  </div>
-                );
-              })}
-            </CardContent>
-          </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
           <Card className="">
             <CardHeader>
