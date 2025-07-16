@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { User, MapPin, Calendar, Mail, Linkedin, Shield, Github, FileText } from "lucide-react";
+import { User, MapPin, Calendar, Mail, Shield, FileText } from "lucide-react";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
 
@@ -23,13 +24,13 @@ const About = () => {
       color: 'text-orange-500 hover:text-orange-600'
     },
     { 
-      icon: Linkedin, 
+      icon: FaLinkedin, 
       label: 'LinkedIn', 
       href: 'https://linkedin.com/in/alechsu83',
-      color: 'text-blue-600 hover:text-blue-700'
+      color: 'text-blue-500 hover:text-blue-600'
     },
     { 
-      icon: Github, 
+      icon: FaGithub, 
       label: 'GitHub', 
       href: 'https://github.com/hsu022210',
       color: 'text-purple-600 hover:text-purple-700'

@@ -1,48 +1,12 @@
 import { Card, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, Calendar, Code2, Server } from "lucide-react";
+import { ExternalLink, Calendar, Code2, Server } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
-import {
-  SiPython, SiJavascript, SiHtml5, SiReact, SiNodedotjs, SiDjango, SiGraphql, SiJest, SiTypescript, SiVite, SiVitest, SiSass, SiPostgresql, SiDocker, SiKubernetes, SiTravisci, SiGithub, SiSlack, SiJira, SiGitlab, SiFigma, SiInvision
-} from 'react-icons/si';
-import { FaDatabase, FaProjectDiagram, FaEnvelope } from 'react-icons/fa';
-import type { ReactNode } from 'react';
-
-const skillIconMap: Record<string, ReactNode> = {
-  'React.js': <SiReact className="text-cyan-500" />,
-  'TypeScript': <SiTypescript className="text-blue-600" />,
-  'JavaScript(ES6+)': <SiJavascript className="text-yellow-400" />,
-  'Vite': <SiVite className="text-purple-500" />,
-  'Vitest': <SiVitest className="text-lime-500" />,
-  'Zustand': <span className="text-green-600 text-lg">🌿</span>,
-  'Zod': <span className="text-green-500 text-lg">💎</span>,
-  'SCSS': <SiSass className="text-pink-500" />,
-  'Carbon': <FaProjectDiagram className="text-gray-400" />,
-  'Jest': <SiJest className="text-red-500" />,
-  'RESTful API': <FaDatabase className="text-indigo-500" />,
-  'Python': <SiPython className="text-blue-500" />,
-  'Django': <SiDjango className="text-green-700" />,
-  'GraphQL': <SiGraphql className="text-pink-600" />,
-  'Node.js': <SiNodedotjs className="text-green-600" />,
-  'HTML': <SiHtml5 className="text-orange-500" />,
-  'Bootstrap': <SiSass className="text-purple-600" />,
-  'Authentication': <FaProjectDiagram className="text-gray-400" />,
-  'Web Crawling': <FaProjectDiagram className="text-pink-500" />,
-  'Microservice': <FaProjectDiagram className="text-gray-400" />,
-  'PostgreSQL': <SiPostgresql className="text-blue-700" />,
-  'Kubernetes': <SiKubernetes className="text-blue-400" />,
-  'Docker': <SiDocker className="text-blue-400" />,
-  'Travis CI': <SiTravisci className="text-green-600" />,
-  'Slack': <SiSlack className="text-purple-400" />,
-  'Github': <SiGithub className="text-black dark:text-white" />,
-  'Jira': <SiJira className="text-blue-600" />,
-  'Gitlab': <SiGitlab className="text-orange-600" />,
-  'Figma': <SiFigma className="text-pink-600" />,
-  'InVision': <SiInvision className="text-pink-400" />,
-  'Outlook': <FaEnvelope className="text-blue-600" />,
-};
+import { skillIconMap } from "@/lib/skill-icon-map";
+import { FaProjectDiagram } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
 const projects = [
   {
@@ -155,8 +119,8 @@ const Projects = () => {
                   </div>
 
                   {/* Project Links as Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                    <Button asChild variant="default" size="default" className="flex-1 group/btn">
+                  <div className="grid grid-cols-2 gap-3 mt-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+                    <Button asChild variant="default" size="default" className="w-full group/btn">
                       <a
                         href={project.links.website}
                         target="_blank"
@@ -167,18 +131,18 @@ const Projects = () => {
                         <span className="sm:inline">Website</span>
                       </a>
                     </Button>
-                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                    <Button asChild variant="outline" size="default" className="w-full group/btn">
                       <a
                         href={project.links.frontend}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2"
                       >
-                        <Github className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        <FaGithub className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
                         <span className="sm:inline">Frontend</span>
                       </a>
                     </Button>
-                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                    <Button asChild variant="outline" size="default" className="w-full group/btn">
                       <a
                         href={project.links.backend}
                         target="_blank"
@@ -189,7 +153,7 @@ const Projects = () => {
                         <span className="sm:inline">Backend</span>
                       </a>
                     </Button>
-                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                    <Button asChild variant="outline" size="default" className="w-full group/btn">
                       <a
                         href={project.links.api}
                         target="_blank"

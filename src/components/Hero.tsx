@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { ChevronDown, Download, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronDown, Download, Mail } from "lucide-react";
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Hero = () => {
   const scrollToAbout = () => {
@@ -47,7 +48,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               aria-label="GitHub"
             >
-              <Github className="h-5 w-5 sm:h-6 sm:w-6" />
+              <FaGithub className="h-5 w-5 sm:h-6 sm:w-6" />
             </a>
           </Button>
           <Button asChild variant="ghost" size="icon">
@@ -57,7 +58,7 @@ const Hero = () => {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
-              <Linkedin className="h-5 w-5 sm:h-6 sm:w-6" />
+              <FaLinkedin className="h-5 w-5 sm:h-6 sm:w-6" />
             </a>
           </Button>
           <Button asChild variant="ghost" size="icon">
