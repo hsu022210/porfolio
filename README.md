@@ -39,8 +39,8 @@ A modern, responsive portfolio website built with React, TypeScript, Vite, and T
 ### Installation
 
 ```bash
-git clone https://github.com/hsu022210/porfolio.git
-cd porfolio
+git clone https://github.com/hsu022210/portfolio.git
+cd portfolio
 npm install
 ```
 
