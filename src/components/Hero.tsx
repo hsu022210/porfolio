@@ -23,7 +23,7 @@ const Hero = () => {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 crisp-text px-2">
           <span className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 crisp-gradient-text">Alec Hsu</span>
         </h1>
-        <Badge variant="outline" className="text-base sm:text-lg px-3 sm:px-4 py-1 sm:py-2 mb-2 crisp-text">Software Engineer</Badge>
+        <Badge variant="outline" className="text-base sm:text-lg px-3 sm:px-4 py-1 sm:py-2 mb-2 crisp-text">Web Developer</Badge>
         <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4 crisp-text px-4">
           Software engineer with 6+ years of experience specializing in scalable web application development using React, TypeScript. Proven success in building high-performance and maintainable codebase for enterprise-scale products.
         </p>
