@@ -2,6 +2,8 @@ import { Card, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, Calendar, Code2, Server } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/use-animations";
 import {
   SiPython, SiJavascript, SiHtml5, SiReact, SiNodedotjs, SiDjango, SiGraphql, SiJest, SiTypescript, SiVite, SiVitest, SiSass, SiPostgresql, SiDocker, SiKubernetes, SiTravisci, SiGithub, SiSlack, SiJira, SiGitlab, SiFigma, SiInvision
 } from 'react-icons/si';
@@ -57,121 +59,155 @@ const projects = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0
+  }
+};
+
 const Projects = () => {
+  const animation = useScrollAnimation();
+
   return (
-    <section id="projects" className="py-24 bg-background">
+    <motion.section 
+      id="projects" 
+      className="py-16 sm:py-24 bg-background"
+      ref={animation.ref}
+      initial={animation.initial}
+      animate={animation.animate}
+      transition={animation.transition}
+    >
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-3 crisp-text">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 crisp-text">
             Side <span className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 crisp-gradient-text">Project</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
             A showcase of my latest work and technical expertise
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <motion.div 
+          className="max-w-4xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {projects.map((project) => (
-            <Card 
-              key={project.name} 
-              className="group overflow-hidden border-2 hover:border-primary/20 dark:hover:border-primary/30 dark:bg-card/50"
-            >
-              <div className="p-6">
-                {/* Header Section */}
-                <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 gap-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Code2 className="h-5 w-5 text-primary" />
-                      <CardTitle className="text-xl lg:text-2xl transition-colors">
-                        {project.name}
-                      </CardTitle>
+            <motion.div key={project.name} variants={cardVariants}>
+              <Card 
+                className="group overflow-hidden border-2 hover:border-primary/20 dark:hover:border-primary/30 dark:bg-card/50"
+              >
+                <div className="p-6">
+                  {/* Header Section */}
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <Code2 className="h-5 w-5 text-primary" />
+                        <CardTitle className="text-xl lg:text-2xl transition-colors">
+                          {project.name}
+                        </CardTitle>
+                      </div>
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Calendar className="h-4 w-4" />
+                        <span className="text-sm">Last updated: {project.updated_at}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span className="text-sm">Last updated: {project.updated_at}</span>
+                    <Badge variant="outline" className="text-sm px-3 py-1 self-start">
+                      Side Project
+                    </Badge>
+                  </div>
+
+                  {/* Description */}
+                  <div className="mb-6">
+                    <p className="text-muted-foreground leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Tech Stack */}
+                  <div className="mb-6">
+                    <h3 className="text-base font-semibold mb-3 text-foreground">Technologies Used</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {project.stack.map((tech, i) => (
+                        <Badge 
+                          key={i} 
+                          variant="secondary" 
+                          className="text-xs px-3 py-1 bg-secondary/50 hover:bg-secondary transition-colors flex items-center gap-2"
+                        >
+                          {skillIconMap[tech] || <FaProjectDiagram className="text-gray-400" />} {tech}
+                        </Badge>
+                      ))}
                     </div>
                   </div>
-                  <Badge variant="outline" className="text-sm px-3 py-1 self-start">
-                    Side Project
-                  </Badge>
-                </div>
 
-                {/* Description */}
-                <div className="mb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Tech Stack */}
-                <div className="mb-6">
-                  <h3 className="text-base font-semibold mb-3 text-foreground">Technologies Used</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.stack.map((tech, i) => (
-                      <Badge 
-                        key={i} 
-                        variant="secondary" 
-                        className="text-xs px-3 py-1 bg-secondary/50 hover:bg-secondary transition-colors flex items-center gap-2"
+                  {/* Project Links as Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                    <Button asChild variant="default" size="default" className="flex-1 group/btn">
+                      <a
+                        href={project.links.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
                       >
-                        {skillIconMap[tech] || <FaProjectDiagram className="text-gray-400" />} {tech}
-                      </Badge>
-                    ))}
+                        <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                        <span className="sm:inline">Website</span>
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                      <a
+                        href={project.links.frontend}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Github className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        <span className="sm:inline">Frontend</span>
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                      <a
+                        href={project.links.backend}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Server className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        <span className="sm:inline">Backend</span>
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" size="default" className="flex-1 group/btn">
+                      <a
+                        href={project.links.api}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2"
+                      >
+                        <Code2 className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
+                        <span className="sm:inline">API Doc</span>
+                      </a>
+                    </Button>
                   </div>
                 </div>
-
-                {/* Project Links as Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 mt-6">
-                  <Button asChild variant="default" size="default" className="flex-1 group/btn">
-                    <a
-                      href={project.links.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                      Website
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="default" className="flex-1 group/btn">
-                    <a
-                      href={project.links.frontend}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <Github className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                      Frontend
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="default" className="flex-1 group/btn">
-                    <a
-                      href={project.links.backend}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <Server className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                      Backend
-                    </a>
-                  </Button>
-                  <Button asChild variant="outline" size="default" className="flex-1 group/btn">
-                    <a
-                      href={project.links.api}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <Code2 className="h-4 w-4 group-hover/btn:scale-110 transition-transform" />
-                      API Doc
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

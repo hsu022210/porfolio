@@ -1,8 +1,12 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/use-animations";
 
 const Experience = () => {
+  const animation = useScrollAnimation();
+  
   const experiences = [
     {
       title: 'Senior Software Engineer',
@@ -53,51 +57,58 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-24 bg-background">
+    <motion.section 
+      id="experience" 
+      className="py-16 sm:py-24 bg-background"
+      ref={animation.ref}
+      initial={animation.initial}
+      animate={animation.animate}
+      transition={animation.transition}
+    >
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4 crisp-text">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 crisp-text">
             Work <span className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 crisp-gradient-text">Experience</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
             My professional journey and achievements
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {experiences.map((experience, index) => (
             <Card 
               key={index} 
               className={`dark:bg-card/50`}
             >
-              <CardHeader>
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <Badge variant="outline" className="p-2">
-                      <Briefcase className="h-4 w-4" />
+              <CardHeader className="pb-3 sm:pb-6">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
+                  <div className="flex items-start sm:items-center gap-3">
+                    <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
+                      <Briefcase className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Badge>
-                    <div>
-                      <CardTitle className="text-xl">{experience.title}</CardTitle>
-                      <p className="text-blue-500 dark:text-blue-400 font-medium">{experience.company}</p>
+                    <div className="min-w-0 flex-1">
+                      <CardTitle className="text-lg sm:text-xl mb-1">{experience.title}</CardTitle>
+                      <p className="text-blue-500 dark:text-blue-400 font-medium text-sm sm:text-base">{experience.company}</p>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-4 text-sm text-muted-foreground">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
-                      <MapPin className="h-4 w-4" />
-                      {experience.location}
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="break-words">{experience.location}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
+                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
                       {experience.period}
                     </div>
                   </div>
                 </div>
               </CardHeader>
               
-              <CardContent>
-                <ul className="list-disc list-inside text-muted-foreground leading-relaxed space-y-1">
+              <CardContent className="pt-0">
+                <ul className="list-disc list-inside text-muted-foreground leading-relaxed space-y-1 text-sm sm:text-base">
                   {experience.description.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i} className="break-words">{item}</li>
                   ))}
                 </ul>
               </CardContent>
@@ -105,7 +116,7 @@ const Experience = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

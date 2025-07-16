@@ -1,7 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar, MapPin, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/use-animations";
 
 const Education = () => {
+  const animation = useScrollAnimation();
+  
   const education = [
     {
       degree: "M.S. in Computer Science",
@@ -17,49 +21,82 @@ const Education = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0
+    }
+  };
+
   return (
-    <section id="education" className="py-20 bg-alt">
+    <motion.section 
+      id="education" 
+      className="py-16 sm:py-20 bg-alt"
+      ref={animation.ref}
+      initial={animation.initial}
+      animate={animation.animate}
+      transition={animation.transition}
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-                      <h2 className="text-3xl font-bold mb-4 crisp-text">
-              <span className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 crisp-gradient-text">Education</span>
-            </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 crisp-text">
+            <span className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-400 dark:to-purple-400 crisp-gradient-text">Education</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
             My academic background and achievements that have shaped my technical foundation.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <motion.div 
+          className="max-w-4xl mx-auto"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {education.map((edu, index) => (
-            <Card key={index} className="mb-6 animate-fade-in dark:bg-card/50">
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <GraduationCap className="h-6 w-6 text-primary" />
+            <motion.div key={index} variants={cardVariants}>
+              <Card className="mb-4 sm:mb-6 dark:bg-card/50">
+                <CardHeader className="pb-3 sm:pb-6">
+                  <div className="flex items-start sm:items-center gap-3">
+                    <div className="p-1.5 sm:p-2 bg-primary/10 rounded-lg flex-shrink-0">
+                      <GraduationCap className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <CardTitle className="text-lg sm:text-xl mb-1">{edu.degree}</CardTitle>
+                      <p className="text-base sm:text-lg font-medium text-primary">{edu.school}</p>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-xl">{edu.degree}</CardTitle>
-                    <p className="text-lg font-medium text-primary">{edu.school}</p>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+                    <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+                      {edu.period}
+                    </div>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                      <span className="break-words">{edu.location}</span>
+                    </div>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-6">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
-                    {edu.period}
-                  </div>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
-                    {edu.location}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
