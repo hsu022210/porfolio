@@ -1,9 +1,10 @@
 import {
   SiPython, SiJavascript, SiHtml5, SiReact, SiNodedotjs, SiDjango, SiGraphql, SiJest, SiTypescript, SiVite, SiVitest, SiSass, SiPostgresql, SiDocker, SiKubernetes, SiTravisci, SiGithub, SiSlack, SiJira, SiGitlab, SiFigma, SiInvision, SiWebcomponentsdotorg
 } from 'react-icons/si';
-import { FaProjectDiagram, FaEnvelope, FaLock, FaSpider, FaNetworkWired, FaExchangeAlt, FaCubes } from 'react-icons/fa';
+import { FaProjectDiagram, FaEnvelope, FaLock, FaSpider, FaNetworkWired, FaExchangeAlt, FaTwitter } from 'react-icons/fa';
 import { VscVscode } from 'react-icons/vsc';
 import type { ReactNode } from 'react';
+import { Bee, IbmAspera, Carbon } from '@carbon/icons-react';
 
 export const skillIconMap: Record<string, ReactNode> = {
   'React.js': <SiReact className="text-cyan-500" />,
@@ -14,7 +15,7 @@ export const skillIconMap: Record<string, ReactNode> = {
   'Zustand': <span className="text-green-600 text-md">🌿</span>,
   'Zod': <span className="text-green-500 text-md">💎</span>,
   'SCSS': <SiSass className="text-pink-500" />,
-  'Carbon': <FaCubes className="text-blue-900" />,
+  'Carbon': <Carbon className="text-blue-900" />,
   'Jest': <SiJest className="text-red-500" />,
   'RESTful API': <FaExchangeAlt className="text-indigo-500" />,
   'Python': <SiPython className="text-blue-500" />,
@@ -40,4 +41,7 @@ export const skillIconMap: Record<string, ReactNode> = {
   'Outlook': <FaEnvelope className="text-blue-600" />,
   'VS Code': <VscVscode className="text-blue-500" />,
   'Zenhub': <FaProjectDiagram className="text-purple-600" />,
+  'IBM': <Bee className="text-blue-600" />,
+  'IBM ASPERA': <IbmAspera className="text-blue-500" />,
+  'TWITTER': <FaTwitter className="text-blue-400" />,
 }; 

@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { User, MapPin, Calendar, Mail, Shield, FileText } from "lucide-react";
+import { User, MapPin, Calendar, Mail, Shield, FileText, Phone } from "lucide-react";
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
@@ -89,7 +89,7 @@ const About = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                  <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                   Contact & Links
                 </CardTitle>
               </CardHeader>

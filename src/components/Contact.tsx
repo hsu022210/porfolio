@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
+import { FaLinkedin } from "react-icons/fa";
 
 const Contact = () => {
   const animation = useScrollAnimation();
@@ -15,7 +16,7 @@ const Contact = () => {
       link: 'mailto:alechsu83@gmail.com'
     },
     {
-      icon: Linkedin,
+      icon: FaLinkedin,
       label: 'LinkedIn',
       value: 'linkedin.com/in/alechsu83',
       link: 'https://linkedin.com/in/alechsu83'
@@ -69,7 +70,7 @@ const Contact = () => {
           <Card className="dark:bg-card/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                 Contact Information
               </CardTitle>
             </CardHeader>

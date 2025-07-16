@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
+import { skillIconMap } from "@/lib/skill-icon-map";
 
 const Experience = () => {
   const animation = useScrollAnimation();
@@ -89,7 +90,12 @@ const Experience = () => {
                     </Badge>
                     <div className="min-w-0 flex-1">
                       <CardTitle className="text-lg sm:text-xl mb-1">{experience.title}</CardTitle>
-                      <p className="text-blue-500 dark:text-blue-400 font-medium text-sm sm:text-base">{experience.company}</p>
+                      <p className="text-blue-500 dark:text-blue-400 font-medium text-sm sm:text-base flex items-center gap-1">
+                        {skillIconMap[experience.company] && (
+                          <span className="inline-flex items-center mr-1 align-middle">{skillIconMap[experience.company]}</span>
+                        )}
+                        {experience.company}
+                      </p>
                     </div>
                   </div>
                   <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
