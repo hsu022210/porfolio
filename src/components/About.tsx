@@ -9,6 +9,8 @@ import { config } from "@/lib/config";
 
 const About = () => {
   const animation = useScrollAnimation();
+  const personalInfoAnimation = useScrollAnimation({ staggerDelay: 0.2 });
+  const contactAnimation = useScrollAnimation({ staggerDelay: 0.2 });
   
   const personalInfo = [
     { icon: User, label: 'Name', value: 'Alec Hsu' },
@@ -73,17 +75,26 @@ const About = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4">
-                {personalInfo.map((info, index) => (
-                  <div key={index} className="flex items-start sm:items-center gap-3 sm:gap-4">
-                    <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
-                      <info.icon className="h-3 w-3 sm:h-4 sm:w-4" />
-                    </Badge>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-xs sm:text-sm text-muted-foreground">{info.label}:</span>
-                      <span className="ml-1 sm:ml-2 font-medium text-sm sm:text-base break-words">{info.value}</span>
-                    </div>
-                  </div>
-                ))}
+                <motion.div
+                  ref={personalInfoAnimation.ref}
+                  variants={personalInfoAnimation.containerVariants}
+                  initial="hidden"
+                  animate={personalInfoAnimation.isInView ? "visible" : "hidden"}
+                >
+                  {personalInfo.map((info, index) => (
+                    <motion.div key={index} variants={personalInfoAnimation.itemVariants}>
+                      <div className="flex items-start sm:items-center gap-3 sm:gap-4">
+                        <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
+                          <info.icon className="h-3 w-3 sm:h-4 sm:w-4" />
+                        </Badge>
+                        <div className="min-w-0 flex-1">
+                          <span className="text-xs sm:text-sm text-muted-foreground">{info.label}:</span>
+                          <span className="ml-1 sm:ml-2 font-medium text-sm sm:text-base break-words">{info.value}</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
               </CardContent>
             </Card>
 
@@ -95,22 +106,29 @@ const About = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <motion.div 
+                  ref={contactAnimation.ref}
+                  variants={contactAnimation.containerVariants}
+                  initial="hidden"
+                  animate={contactAnimation.isInView ? "visible" : "hidden"}
+                  className="grid grid-cols-2 gap-3 sm:gap-4"
+                >
                   {contactLinks.map((link, index) => (
-                    <a
-                      key={index}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-col items-center gap-2 p-4 rounded-lg border hover:bg-muted/50 transition-all duration-200 hover:scale-105 group"
-                    >
-                      <div className={`p-2 rounded-full bg-muted/50 group-hover:bg-muted transition-colors ${link.color}`}>
-                        <link.icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                      </div>
-                      <span className="text-xs sm:text-sm font-medium text-center">{link.label}</span>
-                    </a>
+                    <motion.div key={index} variants={contactAnimation.itemVariants}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center gap-2 p-4 rounded-lg border hover:bg-muted/50 transition-all duration-200 hover:scale-105 group"
+                      >
+                        <div className={`p-2 rounded-full bg-muted/50 group-hover:bg-muted transition-colors ${link.color}`}>
+                          <link.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                        </div>
+                        <span className="text-xs sm:text-sm font-medium text-center">{link.label}</span>
+                      </a>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </CardContent>
             </Card>
           </div>

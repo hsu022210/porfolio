@@ -7,6 +7,7 @@ import { skillIconMap } from "@/lib/skill-icon-map";
 
 const Experience = () => {
   const animation = useScrollAnimation();
+  const experienceAnimation = useScrollAnimation({ staggerDelay: 0.4 });
   
   const experiences = [
     {
@@ -76,51 +77,58 @@ const Experience = () => {
           </p>
         </div>
 
-        <div className="space-y-4 sm:space-y-6">
+        <motion.div 
+          className="space-y-4 sm:space-y-6"
+          ref={experienceAnimation.ref}
+          variants={experienceAnimation.containerVariants}
+          initial="hidden"
+          animate={experienceAnimation.isInView ? "visible" : "hidden"}
+        >
           {experiences.map((experience, index) => (
-            <Card 
-              key={index} 
-              className={`dark:bg-card/50`}
-            >
-              <CardHeader className="pb-3 sm:pb-6">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
-                  <div className="flex items-start sm:items-center gap-3">
-                    <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
-                      <Briefcase className="h-3 w-3 sm:h-4 sm:w-4" />
-                    </Badge>
-                    <div className="min-w-0 flex-1">
-                      <CardTitle className="text-lg sm:text-xl mb-1">{experience.title}</CardTitle>
-                      <p className="text-blue-500 dark:text-blue-400 font-medium text-sm sm:text-base flex items-center gap-1">
-                        {skillIconMap[experience.company] && (
-                          <span className="inline-flex items-center mr-1 align-middle">{skillIconMap[experience.company]}</span>
-                        )}
-                        {experience.company}
-                      </p>
+            <motion.div key={index} variants={experienceAnimation.itemVariants}>
+              <Card 
+                className={`dark:bg-card/50`}
+              >
+                <CardHeader className="pb-3 sm:pb-6">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4">
+                    <div className="flex items-start sm:items-center gap-3">
+                      <Badge variant="outline" className="p-1.5 sm:p-2 flex-shrink-0">
+                        <Briefcase className="h-3 w-3 sm:h-4 sm:w-4" />
+                      </Badge>
+                      <div className="min-w-0 flex-1">
+                        <CardTitle className="text-lg sm:text-xl mb-1">{experience.title}</CardTitle>
+                        <p className="text-blue-500 dark:text-blue-400 font-medium text-sm sm:text-base flex items-center gap-1">
+                          {skillIconMap[experience.company] && (
+                            <span className="inline-flex items-center mr-1 align-middle">{skillIconMap[experience.company]}</span>
+                          )}
+                          {experience.company}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                        <span className="break-words">{experience.location}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
+                        {experience.period}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
-                      <span className="break-words">{experience.location}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3 sm:h-4 sm:w-4" />
-                      {experience.period}
-                    </div>
-                  </div>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="pt-0">
-                <ul className="list-disc list-inside text-muted-foreground leading-relaxed space-y-1 text-sm sm:text-base">
-                  {experience.description.map((item, i) => (
-                    <li key={i} className="break-words">{item}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                </CardHeader>
+                
+                <CardContent className="pt-0">
+                  <ul className="list-disc list-inside text-muted-foreground leading-relaxed space-y-1 text-sm sm:text-base">
+                    {experience.description.map((item, i) => (
+                      <li key={i} className="break-words">{item}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

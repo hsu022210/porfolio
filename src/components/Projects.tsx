@@ -23,27 +23,9 @@ const projects = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0
-  }
-};
-
 const Projects = () => {
   const animation = useScrollAnimation();
+  const projectsAnimation = useScrollAnimation({ staggerDelay: 0.5 });
 
   return (
     <motion.section 
@@ -66,12 +48,13 @@ const Projects = () => {
 
         <motion.div 
           className="max-w-4xl mx-auto"
-          variants={containerVariants}
+          ref={projectsAnimation.ref}
+          variants={projectsAnimation.containerVariants}
           initial="hidden"
-          animate="visible"
+          animate={projectsAnimation.isInView ? "visible" : "hidden"}
         >
           {projects.map((project) => (
-            <motion.div key={project.name} variants={cardVariants}>
+            <motion.div key={project.name} variants={projectsAnimation.itemVariants}>
               <Card 
                 className="group overflow-hidden border-2 hover:border-primary/20 dark:hover:border-primary/30 dark:bg-card/50"
               >

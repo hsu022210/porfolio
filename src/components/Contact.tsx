@@ -7,6 +7,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 const Contact = () => {
   const animation = useScrollAnimation();
+  const contactAnimation = useScrollAnimation({ staggerDelay: 0.3 });
   
   const contactInfo = [
     {
@@ -22,25 +23,6 @@ const Contact = () => {
       link: 'https://linkedin.com/in/alechsu83'
     }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0
-    }
-  };
 
   return (
     <motion.section 
@@ -63,9 +45,10 @@ const Contact = () => {
 
         <motion.div 
           className="max-w-2xl mx-auto"
-          variants={containerVariants}
+          ref={contactAnimation.ref}
+          variants={contactAnimation.containerVariants}
           initial="hidden"
-          animate="visible"
+          animate={contactAnimation.isInView ? "visible" : "hidden"}
         >
           <Card className="dark:bg-card/50">
             <CardHeader>
@@ -82,7 +65,7 @@ const Contact = () => {
                   className="flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border hover:bg-muted/50 transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={itemVariants}
+                  variants={contactAnimation.itemVariants}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >

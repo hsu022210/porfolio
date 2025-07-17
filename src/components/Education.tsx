@@ -5,6 +5,7 @@ import { useScrollAnimation } from "@/hooks/use-animations";
 
 const Education = () => {
   const animation = useScrollAnimation();
+  const educationAnimation = useScrollAnimation({ staggerDelay: 0.3 });
   
   const education = [
     {
@@ -20,25 +21,6 @@ const Education = () => {
       period: "Aug 2012 – June 2016"
     }
   ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0
-    }
-  };
 
   return (
     <motion.section 
@@ -61,12 +43,13 @@ const Education = () => {
 
         <motion.div 
           className="max-w-4xl mx-auto"
-          variants={containerVariants}
+          ref={educationAnimation.ref}
+          variants={educationAnimation.containerVariants}
           initial="hidden"
-          animate="visible"
+          animate={educationAnimation.isInView ? "visible" : "hidden"}
         >
           {education.map((edu, index) => (
-            <motion.div key={index} variants={cardVariants}>
+            <motion.div key={index} variants={educationAnimation.itemVariants}>
               <Card className="mb-4 sm:mb-6 dark:bg-card/50">
                 <CardHeader className="pb-3 sm:pb-6">
                   <div className="flex items-start sm:items-center gap-3">

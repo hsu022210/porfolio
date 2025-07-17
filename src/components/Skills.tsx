@@ -18,27 +18,11 @@ const languages = [
   'English (Fluent)', 'Mandarin Chinese (Native)'
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0
-  }
-};
-
 const Skills = () => {
   const animation = useScrollAnimation();
+  const techStacksAnimation = useScrollAnimation({ staggerDelay: 0.05 });
+  const toolsAnimation = useScrollAnimation({ staggerDelay: 0.1 });
+  const languagesAnimation = useScrollAnimation({ staggerDelay: 0.1 });
 
   return (
     <motion.section 
@@ -60,12 +44,7 @@ const Skills = () => {
         </div>
 
         {/* Tech Stacks */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <Card className="mb-6 sm:mb-8 dark:bg-card/50">
+        <Card className="mb-6 sm:mb-8 dark:bg-card/50">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <Cpu className="h-4 w-4 sm:h-5 sm:w-5" /> Tech Stacks
@@ -74,12 +53,13 @@ const Skills = () => {
             <CardContent>
               <motion.div 
                 className="flex flex-wrap gap-1.5 sm:gap-2"
-                variants={containerVariants}
+                ref={techStacksAnimation.ref}
+                variants={techStacksAnimation.containerVariants}
                 initial="hidden"
-                animate="visible"
+                animate={techStacksAnimation.isInView ? "visible" : "hidden"}
               >
                 {techStacks.map((skill, i) => (
-                  <motion.div key={i} variants={itemVariants}>
+                  <motion.div key={i} variants={techStacksAnimation.itemVariants}>
                     <Badge variant="secondary" className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm">
                       {skillIconMap[skill] || <FaProjectDiagram className="text-gray-400" />} {skill}
                     </Badge>
@@ -99,12 +79,13 @@ const Skills = () => {
             <CardContent>
               <motion.div 
                 className="flex flex-wrap gap-1.5 sm:gap-2"
-                variants={containerVariants}
+                ref={toolsAnimation.ref}
+                variants={toolsAnimation.containerVariants}
                 initial="hidden"
-                animate="visible"
+                animate={toolsAnimation.isInView ? "visible" : "hidden"}
               >
                 {tools.map((tool, i) => (
-                  <motion.div key={i} variants={itemVariants}>
+                  <motion.div key={i} variants={toolsAnimation.itemVariants}>
                     <Badge variant="secondary" className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm">
                       {skillIconMap[tool] || <FaProjectDiagram className="text-gray-400" />} {tool}
                     </Badge>
@@ -124,12 +105,13 @@ const Skills = () => {
             <CardContent>
               <motion.div 
                 className="flex flex-wrap gap-1.5 sm:gap-2"
-                variants={containerVariants}
+                ref={languagesAnimation.ref}
+                variants={languagesAnimation.containerVariants}
                 initial="hidden"
-                animate="visible"
+                animate={languagesAnimation.isInView ? "visible" : "hidden"}
               >
                 {languages.map((lang, i) => (
-                  <motion.div key={i} variants={itemVariants}>
+                  <motion.div key={i} variants={languagesAnimation.itemVariants}>
                     <Badge variant="secondary" className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 text-xs sm:text-sm">
                       {lang}
                     </Badge>
@@ -138,9 +120,8 @@ const Skills = () => {
               </motion.div>
             </CardContent>
           </Card>
-        </motion.div>
-      </div>
-    </motion.section>
+        </div>
+      </motion.section>
   );
 };
 
