@@ -5,6 +5,7 @@ import { User, MapPin, Calendar, Mail, Shield, FileText, Phone } from "lucide-re
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/use-animations";
+import { config } from "@/lib/config";
 
 const About = () => {
   const animation = useScrollAnimation();
@@ -20,25 +21,25 @@ const About = () => {
     { 
       icon: Mail, 
       label: 'Email', 
-      href: 'mailto:alechsu83@gmail.com',
+      href: `mailto:${config.contact.email}`,
       color: 'text-orange-500 hover:text-orange-600'
     },
     { 
       icon: FaLinkedin, 
       label: 'LinkedIn', 
-      href: 'https://linkedin.com/in/alechsu83',
+      href: config.contact.linkedin,
       color: 'text-blue-500 hover:text-blue-600'
     },
     { 
       icon: FaGithub, 
       label: 'GitHub', 
-      href: 'https://github.com/hsu022210',
+      href: config.contact.github,
       color: 'text-purple-600 hover:text-purple-700'
     },
     { 
       icon: FileText, 
-      label: 'Resume', 
-      href: 'https://drive.google.com/file/d/1A7tSV9T6Sfo1JRQqeDnZbfceak4JrhRO/view?usp=share_link',
+      label: config.resume.label, 
+      href: config.resume.url,
       color: 'text-green-600 hover:text-green-700'
     },
   ];

@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ChevronDown, Download, Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { config } from "@/lib/config";
 
 const Hero = () => {
   const scrollToAbout = () => {
@@ -30,20 +31,20 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-4 w-full max-w-sm sm:max-w-none">
           <Button asChild size="lg" className="w-full sm:w-auto">
             <a
-              href="https://drive.google.com/file/d/1A7tSV9T6Sfo1JRQqeDnZbfceak4JrhRO/view?usp=share_link"
+              href={config.resume.url}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2"
             >
               <Download className="h-4 w-4 sm:h-5 sm:w-5" />
-              Download Resume
+              Download {config.resume.label}
             </a>
           </Button>
         </div>
         <div className="flex justify-center items-center gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Button asChild variant="ghost" size="icon">
             <a
-              href="https://github.com/hsu022210"
+              href={config.contact.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -53,7 +54,7 @@ const Hero = () => {
           </Button>
           <Button asChild variant="ghost" size="icon">
             <a
-              href="https://www.linkedin.com/in/alechsu83"
+              href={config.contact.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -63,7 +64,7 @@ const Hero = () => {
           </Button>
           <Button asChild variant="ghost" size="icon">
             <a
-              href="mailto:alechsu83@gmail.com"
+              href={`mailto:${config.contact.email}`}
               aria-label="Email"
             >
               <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
