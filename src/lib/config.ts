@@ -1,6 +1,6 @@
 export const config = {
   resume: {
-    url: 'https://drive.google.com/file/d/1lzpBK3FvqehlOtoOKkBIeWzSWGGpedx7/view?usp=share_link',
+    url: 'https://drive.google.com/file/d/1q6_C9iVwYxQHdXjZuBpEnY2Uv2t2O70U/view?usp=share_link',
     label: 'Resume'
   },
   contact: {
