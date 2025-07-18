@@ -14,7 +14,7 @@ const Experience = () => {
       title: 'Senior Software Engineer',
       company: 'IBM ASPERA',
       location: 'Costa Mesa, CA (Remote)',
-      period: 'Aug 2021 – Feb 2025',
+      period: 'Aug 2021 – Aug 2024',
       description: [
         'Owned front-end development of a microservice-based React application for the IBM Aspera product, serving clients like Netflix, Disney, Apple, and Fox News.',
         'Collaborated with back-end team for API design, integration, enabling efficient data retrieval and maintainability.',

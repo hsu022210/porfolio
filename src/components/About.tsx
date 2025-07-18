@@ -148,6 +148,9 @@ const About = () => {
                 <p>
                   Passionate about building maintainable, scalable, and high-performance web applications.
                 </p>
+                <p>
+                  Actively managing real estate investments since my previous role.
+                </p>
               </div>
 
               <Separator />
